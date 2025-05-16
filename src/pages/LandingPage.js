@@ -1,20 +1,28 @@
-import React from 'react'
-import Home from '../components/Home'
-import About from '../components/About'
-import Skills from '../components/Skills'
-import Projects from '../components/Projects'
-import Contact from '../components/Contact'
+import { useScrollRefs } from '../context/ScrollContext';
+import Home from '../components/Home';
+import About from '../components/About';
+import Skills from '../components/Skills';
+import Projects from '../components/Projects';
+import Contact from '../components/Contact';
 
 const LandingPage = () => {
-  return (
-    <div>
-      <Home />
-      <About />
-      <Skills />
-      <Projects />
-      <Contact />
-    </div>
-  )
-}
+  const {
+    homeRef,
+    aboutRef,
+    skillsRef,
+    projectRef,
+    contactRef
+  } = useScrollRefs();
 
-export default LandingPage
+  return (
+    <>
+      <div ref={homeRef}><Home /></div>
+      <div ref={aboutRef}><About /></div>
+      <div ref={skillsRef}><Skills /></div>
+      <div ref={projectRef}><Projects /></div>
+      <div ref={contactRef}><Contact /></div>
+    </>
+  );
+};
+
+export default LandingPage;

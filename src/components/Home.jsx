@@ -31,9 +31,9 @@ const Home = () => {
               <button className="bg-secondary text-light px-6 py-3 rounded-md hover:bg-dark hover:text-light transition">
                 View Projects
               </button>
-              <button className="border-2 border-dark text-dark px-6 py-3 rounded-md hover:bg-dark hover:text-light transition">
+              {/* <button className="border-2 border-dark text-dark px-6 py-3 rounded-md hover:bg-dark hover:text-light transition">
                 Download CV
-              </button>
+              </button> */}
             </div>
           </div>
 
