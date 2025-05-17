@@ -1,7 +1,10 @@
 import React from 'react';
 import developerImage from '../assets/images/me.png';
 
-const Home = () => {
+const Home = (scrollToRef) => {
+   const handleScroll = () => {
+    scrollToRef?.current?.scrollIntoView({ behavior: 'smooth' });
+  };
   return (
     <section
       id="home"
@@ -28,25 +31,20 @@ const Home = () => {
             </p>
 
             <div className="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
-              <button className="bg-secondary text-light px-6 py-3 rounded-md hover:bg-dark hover:text-light transition">
+              <button   onClick={handleScroll} className="bg-secondary text-light px-6 py-3 rounded-md hover:bg-dark hover:text-light transition">
                 View Projects
               </button>
-              {/* <button className="border-2 border-dark text-dark px-6 py-3 rounded-md hover:bg-dark hover:text-light transition">
-                Download CV
-              </button> */}
+            
             </div>
           </div>
 
 
-          {/* Right Content (Flat Image) */}
-          {/* <div className="w-full md:w-1/2 flex justify-center"> */}
           <div className="relative w-full max-w-lg">
             <img
               src={developerImage}
               alt="Frontend Developer Illustration"
               className="relative w-full rounded-xl"
             />
-            {/* </div> */}
           </div>
         </div>
       </div>

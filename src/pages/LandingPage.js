@@ -16,7 +16,7 @@ const LandingPage = () => {
 
   return (
     <>
-      <div ref={homeRef}><Home /></div>
+      <div ref={homeRef}><Home scrollToRef={projectRef} /></div>
       <div ref={aboutRef}><About /></div>
       <div ref={skillsRef}><Skills /></div>
       <div ref={projectRef}><Projects /></div>

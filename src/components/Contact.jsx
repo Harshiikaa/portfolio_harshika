@@ -75,7 +75,7 @@ const Contact = () => {
                                 <motion.textarea
                                     whileFocus={{ scale: 1.01 }}
                                     name="message"
-                                    rows="5"
+                                    rows="3"
                                     placeholder="How can I help you?"
                                     className="w-full p-3.5 rounded-xl bg-white border border-gray-300 text-dark placeholder-gray-400 shadow-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary transition-all"
                                     required
