@@ -28,7 +28,10 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 bg-light/95 backdrop-blur-sm z-50 border-b border-gray-200 shadow-sm">
+
+    // <nav className="sticky top-0 z-50 bg-white/10 backdrop-blur-lg text-light border-b border-white/20 shadow-sm">
+    <nav className="sticky top-0 z-50  bg-gradient-to-br from-gradientStart via-gradientMid to-gradientEnd">
+
       <div className="container mx-auto px-10 py-6">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -40,7 +43,7 @@ const Navbar = () => {
           </a>
 
           {/* Navigation Links */}
-          <div className="flex space-x-10 text-lg">
+          <div className="flex space-x-10 text-lg font-semibold">
             {navItems.map(({ name, refKey }) => (
               <a
                 key={name}
@@ -50,8 +53,8 @@ const Navbar = () => {
                   scrollToSection(scrollRefs[refKey], name);
                 }}
                 className={`relative pb-1 text-xl transition-all duration-300 hover:scale-105 ${activeLink === name
-                    ? 'text-secondary font-semibold after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-secondary after:rounded'
-                    : 'text-dark hover:text-secondary'
+                  ? 'text-light font-bold after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-light after:rounded'
+                  : 'text-light hover:text-light'
                   }`}
               >
                 {name}

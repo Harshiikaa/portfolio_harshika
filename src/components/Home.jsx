@@ -32,7 +32,7 @@ const Home = ({ scrollToRef }) => {
   return (
     <section
       id="home"
-      className="relative overflow-hidden min-h-screen flex items-center justify-center bg-home-gradient text-light font-poppins"
+      className="relative overflow-hidden pt-12 min-h-[90vh] flex items-center justify-center bg-home-gradient text-light font-poppins"
     >
       {/* Abstract Background Blob */}
       <img

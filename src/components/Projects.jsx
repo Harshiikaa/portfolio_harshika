@@ -28,7 +28,7 @@ const projects = [
 
 const Projects = () => {
     return (
-        <section id="projects" className="py-20 min-h-screen bg-gradient-to-br from-gradientStart via-gradientMid to-gradientEnd text-light font-poppins">
+        <section id="projects" className="pt-12 min-h-screen bg-gradient-to-br from-gradientStart via-gradientMid to-gradientEnd text-light font-poppins">
             <div className="container mx-auto px-6 max-w-5xl">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
@@ -133,7 +133,7 @@ const Projects = () => {
                     ))}
                 </div>
 
-                <div className="mt-12 text-center text-sm text-muted">
+                <div className="pt-6 pb-4 text-center text-sm text-muted">
                     Explore more on my{' '}
                     <motion.a
                         href="https://github.com/Harshiikaa"

@@ -21,7 +21,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="py-20 min-h-screen bg-gradient-to-br from-gradientStart via-gradientMid to-gradientEnd text-light font-poppins"
+      className="pt-12 min-h-[90vh] bg-gradient-to-br from-gradientStart via-gradientMid to-gradientEnd text-light font-poppins"
     >
       <div className="container mx-auto px-6">
         <motion.h2

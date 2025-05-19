@@ -24,7 +24,7 @@ const skillsData = [
 
 const Skills = () => {
     return (
-        <section id="skills" className="py-20 min-h-screen bg-gradient-to-br from-gradientStart via-gradientMid to-gradientEnd text-light font-poppins">
+        <section id="skills" className="pt-12 min-h-[90vh] bg-gradient-to-br from-gradientStart via-gradientMid to-gradientEnd text-light font-poppins">
             <div className="container mx-auto px-6 max-w-5xl">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}

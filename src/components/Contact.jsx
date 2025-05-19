@@ -32,14 +32,14 @@ const Contact = () => {
     return (
         <section
             id="contact"
-            className="relative py-20 min-h-screen bg-gradient-to-br from-gradientStart via-gradientMid to-gradientEnd text-light font-poppins"
+            className="relative py-20 pt-12 min-h-[90vh] bg-gradient-to-br from-gradientStart via-gradientMid to-gradientEnd text-light font-poppins"
         >
             <div className="container mx-auto px-6">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-4xl font-bold text-center mb-12 drop-shadow-md"
+                    className="text-4xl font-bold text-center mb-6 drop-shadow-md"
                 >
                     Let's Connect
                 </motion.h2>
@@ -121,52 +121,50 @@ const Contact = () => {
                                 Other Ways to Reach Me
                             </h3>
                         </motion.div>
+                        <div className="flex flex-col items-center lg:items-start gap-4">
+                            <motion.a
+                                href="mailto:chaudharyharshika8@gmail.com"
+                                whileHover={{ x: 5 }}
+                                className="inline-flex items-center gap-3 px-6 py-2.5 bg-light text-dark border border-white/10 rounded-xl hover:bg-white/90 transition-colors text-sm shadow-sm"
+                            >
+                                <FiMail className="text-2xl text-primary" />
+                                <span className="text-lg">chaudharyharshika8@gmail.com</span>
+                            </motion.a>
 
-                        <div className="flex justify-center lg:justify-start gap-4">
-                            <div className="space-y-4">
-                                <motion.a
-                                    href="mailto:chaudharyharshika8@gmail.com"
-                                    whileHover={{ x: 5 }}
-                                    className="inline-flex items-center gap-3 px-6 py-2.5 bg-light text-dark border border-white/10 rounded-xl hover:bg-white/90 transition-colors text-sm shadow-sm"
-                                >
-                                    <FiMail className="text-2xl text-primary" />
-                                    <span className="text-lg">chaudharyharshika8@gmail.com</span>
-                                </motion.a>
+                            <motion.a
+                                href="https://www.linkedin.com/in/harshika-chaudhary-b8662b222"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                whileHover={{ x: 5 }}
+                                className="inline-flex items-center gap-3 px-6 py-2.5 bg-light text-dark border border-white/10 rounded-xl hover:bg-white/90 transition-colors text-sm shadow-sm"
+                            >
+                                <FiLinkedin className="text-2xl text-secondary" />
+                                <span className="text-lg">LinkedIn Profile</span>
+                            </motion.a>
 
-                                <motion.a
-                                    href="https://www.linkedin.com/in/harshika-chaudhary-b8662b222"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    whileHover={{ x: 5 }}
-                                    className="inline-flex items-center gap-3 px-6 py-2.5 bg-light text-dark border border-white/10 rounded-xl hover:bg-white/90 transition-colors text-sm shadow-sm"
-                                >
-                                    <FiLinkedin className="text-2xl text-secondary" />
-                                    <span className="text-lg">LinkedIn Profile</span>
-                                </motion.a>
+                            <motion.a
+                                href="https://github.com/Harshiikaa"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                whileHover={{ x: 5 }}
+                                className="inline-flex items-center gap-3 px-6 py-2.5 bg-light text-dark border border-white/10 rounded-xl hover:bg-white/90 transition-colors text-sm shadow-sm"
+                            >
+                                <FiGithub className="text-2xl text-accent" />
+                                <span className="text-lg">GitHub Link</span>
+                            </motion.a>
 
-                                <motion.a
-                                    href="https://github.com/Harshiikaa"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    whileHover={{ x: 5 }}
-                                    className="inline-flex items-center gap-3 px-6 py-2.5 bg-light text-dark border border-white/10 rounded-xl hover:bg-white/90 transition-colors text-sm shadow-sm"
-                                >
-                                    <FiGithub className="text-2xl text-accent" />
-                                    <span className="text-lg">GitHub Link</span>
-                                </motion.a>
-
-                                <motion.a
-                                    href="/my_resume_Harshika.pdf"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    whileHover={{ x: 5 }}
-                                    className="inline-flex items-center gap-3 px-6 py-2.5 bg-light text-dark border border-white/10 rounded-xl hover:bg-white/90 transition-colors text-sm shadow-sm"
-                                >
-                                    <FiFile className="text-2xl text-secondary" />
-                                    <span className="text-lg">Resume</span>
-                                </motion.a>
-                            </div>
+                            <motion.a
+                                href="/my_resume_Harshika.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                whileHover={{ x: 5 }}
+                                className="inline-flex items-center gap-3 px-6 py-2.5 bg-light text-dark border border-white/10 rounded-xl hover:bg-white/90 transition-colors text-sm shadow-sm"
+                            >
+                                <FiFile className="text-2xl text-secondary" />
+                                <span className="text-lg">Resume</span>
+                            </motion.a>
                         </div>
+
                     </div>
                 </div>
             </div>
