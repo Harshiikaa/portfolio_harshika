@@ -3,11 +3,10 @@ module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
-  darkMode: 'class', // optional if you want to toggle themes later
+  darkMode: 'class', 
   theme: {
     extend: {
       colors: {
-        // Vibrant Theme Colors Based on Your Home Section
         dark: '#0F172A',               // general background (near dark blue)
         light: '#F9FAFB',              // light text
         primary: '#DC2626',            // red accent

@@ -33,8 +33,8 @@ const About = () => {
           About
         </motion.h2>
 
-        <p className="mb-6 text-muted text-center max-w-3xl mx-auto font-roboto">
-          I'm <span className="font-semibold text-primary">Harshika Chaudhary</span>, a frontend specialist dedicated to crafting high-performance web applications. With expertise in modern JavaScript ecosystems, I architect solutions that combine technical excellence with intuitive user experiences.
+        <p className="mb-6 text-light text-center max-w-3xl mx-auto font-roboto">
+          I'm <span className="font-semibold text-tertiary">Harshika Chaudhary</span>, a frontend specialist dedicated to crafting high-performance web applications. With expertise in modern JavaScript ecosystems, I architect solutions that combine technical excellence with intuitive user experiences.
         </p>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -47,8 +47,8 @@ const About = () => {
             >
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
-                  <div className="h-px w-12 bg-primary" />
-                  <span className="text-sm font-medium text-secondary">KEY TOOLS I USE</span>
+                  <div className="h-px w-12 bg-tertiary" />
+                  <span className="text-sm font-medium text-tertiary">KEY TOOLS I USE</span>
                 </div>
 
                 <ul className="grid grid-cols-2 gap-4">
