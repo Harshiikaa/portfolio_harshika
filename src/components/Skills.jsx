@@ -24,13 +24,13 @@ const skillsData = [
 
 const Skills = () => {
     return (
-        <section id="skills" className="py-20 bg-light">
+        <section id="skills" className="py-20 min-h-screen bg-gradient-to-br from-gradientStart via-gradientMid to-gradientEnd text-light font-poppins">
             <div className="container mx-auto px-6 max-w-5xl">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-4xl font-bold text-center mb-12 text-dark font-poppins"
+                    className="text-4xl font-bold text-center mb-12 drop-shadow-md"
                 >
                     Skills
                 </motion.h2>
@@ -43,9 +43,11 @@ const Skills = () => {
                             whileInView={{ y: 0 }}
                             className="group relative overflow-hidden"
                         >
+                            {/* Hover gradient overlay */}
                             <div className={`absolute inset-0 bg-gradient-to-br ${skillSet.colorClass} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
 
-                            <div className="relative p-6 bg-white rounded-xl border border-gray-100">
+                            {/* Card content */}
+                            <div className="relative p-6 bg-light text-dark rounded-xl border border-white/10 shadow-md">
                                 <div className="flex items-center gap-3 mb-6">
                                     {skillSet.icon}
                                     <h3 className="text-lg font-semibold text-dark">
@@ -58,39 +60,17 @@ const Skills = () => {
                                         <motion.div
                                             key={skill}
                                             whileHover={{ scale: 1.02 }}
-                                            className="px-3 py-2 bg-light text-sm rounded-lg text-dark text-center transition-colors hover:bg-primary/10 relative"
+                                            className="px-3 py-2 bg-gray-100 text-sm rounded-lg text-dark text-center transition-colors hover:bg-white relative"
                                         >
                                             {skill}
                                             <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary" />
                                         </motion.div>
-
                                     ))}
                                 </div>
                             </div>
                         </motion.div>
                     ))}
                 </div>
-
-                {/* <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    className="mt-12 text-center text-sm text-muted space-y-3"
-                >
-                    <div className="inline-flex items-center gap-4 bg-light px-4 py-2 rounded-full">
-                        <span className="flex items-center gap-2">
-                            <div className="w-3 h-3 rounded-full bg-primary" />
-                            Core Technology
-                        </span>
-                        <span className="flex items-center gap-2">
-                            <div className="w-3 h-3 rounded-full bg-secondary" />
-                            Frequent Use
-                        </span>
-                        <span className="flex items-center gap-2">
-                            <div className="w-3 h-3 rounded-full bg-accent" />
-                            Specialized Tools
-                        </span>
-                    </div>
-                </motion.div> */}
             </div>
         </section>
     );
