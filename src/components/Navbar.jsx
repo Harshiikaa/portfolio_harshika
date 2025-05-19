@@ -30,7 +30,7 @@ const Navbar = () => {
   return (
 
     // <nav className="sticky top-0 z-50 bg-white/10 backdrop-blur-lg text-light border-b border-white/20 shadow-sm">
-    <nav className="sticky top-0 z-50  bg-gradient-to-br from-gradientStart via-gradientMid to-gradientEnd">
+    <nav className="sticky top-0 z-50 bg-gradient-to-br from-gradientStart via-gradientMid to-gradientEnd">
 
       <div className="container mx-auto px-10 py-6">
         <div className="flex items-center justify-between">
