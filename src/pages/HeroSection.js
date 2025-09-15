@@ -1,23 +1,39 @@
 // src/pages/HeroSection.jsx
-import { OrbitControls, Text, useGLTF } from "@react-three/drei";
+import { Suspense, useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Suspense, useRef } from "react";
-import AnimatedCamera from "../components/animatedCamera";
+import { OrbitControls, useAnimations, useGLTF } from "@react-three/drei";
 import useSmoothScroll from "../hooks/useSmoothScroll";
 import HeroText from "../components/HeroText";
 
 function Sculpture() {
-  const { scene } = useGLTF("/models/rhetorician.glb");
+  const groupRef = useRef();
+  const { scene, animations } = useGLTF("/models/rhetorician.glb");
+  const { actions } = useAnimations(animations, groupRef);
+  const animationSpeed = 2.0; // speed multiplier
+
+  useEffect(() => {
+    if (!actions) return;
+    Object.values(actions).forEach((action) => {
+      if (!action) return;
+      action.reset();
+      action.setEffectiveTimeScale(animationSpeed);
+      action.play();
+    });
+  }, [actions]);
+
   return (
-    <primitive
-      object={scene}
+    <group
+      ref={groupRef}
       scale={0.2}
-      //   position={[-0.6, -0.6, 0]} // ideal if we use fov 25
       position={[-0.4, -0.85, 0]}
-      rotation={[-Math.PI / 8, Math.PI / 2, 0]} // rotates the model to face front
-    />
+      rotation={[-Math.PI / 8, Math.PI / 2, 0]}
+    >
+      <primitive object={scene} />
+    </group>
   );
 }
+
+// Halo and animations removed
 
 // function HaloRing() {
 //   return (
@@ -53,28 +69,13 @@ export default function HeroSection() {
         <Canvas
           camera={{ position: [2, 1.2, 0.5], fov: 15 }}
           gl={{ toneMappingExposure: 1.5 }}
+          style={{ touchAction: "none" }}
         >
-          {/* <axesHelper args={[2]} /> */}
-
           <Suspense fallback={null}>
-            <AnimatedCamera />
-            <ambientLight intensity={0.5} />
-            <spotLight
-              position={[0, 5, 5]}
-              angle={0.3}
-              penumbra={1}
-              intensity={1.5}
-              castShadow
-            />
-            {/* <Environment preset="sunset" /> */}
-            <OrbitControls
-              enableZoom={true}
-              //   autoRotate
-              //   autoRotateSpeed={1.0}
-              //   autoRotateSpeed={-3.0} // for a bit higher speed
-            />
+            <ambientLight intensity={1} />
+            <directionalLight position={[5, 5, 5]} intensity={1} />
             <Sculpture />
-            {/* <HaloRing /> */}
+            <OrbitControls enableDamping dampingFactor={0.08} />
           </Suspense>
         </Canvas>
 
