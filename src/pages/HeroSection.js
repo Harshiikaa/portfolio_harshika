@@ -98,7 +98,7 @@ function Sculpture() {
       ref={groupRef}
       scale={0.2}
       position={[-0.4, -0.85, 0]}
-      rotation={[-Math.PI / 8, Math.PI / 2, 0]}
+      rotation={[0, Math.PI / 2, 0]}
     >
       <primitive object={scene} />
     </group>
