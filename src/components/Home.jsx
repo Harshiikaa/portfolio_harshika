@@ -61,7 +61,7 @@ const Home = ({ scrollToRef }) => {
             <div className="mt-6 flex justify-center md:justify-start">
               <button
                 onClick={handleScroll}
-                className="bg-light text-gradientStart font-semibold px-6 py-3 rounded-full hover:bg-secondary hover:text-light transition"
+                className="bg-light text-gradientStart font-semibold px-6 py-3 rounded-full hover:bg-dark hover:text-light transition"
               >
                 View Projects
               </button>
