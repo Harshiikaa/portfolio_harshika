@@ -16,7 +16,6 @@ function Sculpture() {
   const { scene, animations } = useGLTF("/models/rhetorician.glb");
   const { actions } = useAnimations(animations, groupRef);
   const animationSpeed = 2.0; // speed multiplier
-  const mouse = useRef({ x: 0, y: 0 });
   const baseRotation = useRef(0);
 
   useEffect(() => {
@@ -100,27 +99,10 @@ function Sculpture() {
     };
   }, [scene]);
 
-  useEffect(() => {
-    const handleMove = (e) => {
-      const x = (e.clientX / window.innerWidth) * 2 - 1;
-      const y = (e.clientY / window.innerHeight) * 2 - 1;
-      mouse.current = { x, y };
-    };
-    window.addEventListener("mousemove", handleMove, { passive: true });
-    return () => window.removeEventListener("mousemove", handleMove);
-  }, []);
-
   useFrame((_, delta) => {
     if (!groupRef.current) return;
     baseRotation.current += delta * 0.15; // slow auto-rotate
-    const targetY = mouse.current.y * 0.08;
-    const targetX = -mouse.current.x * 0.08;
-    groupRef.current.rotation.y = baseRotation.current + targetX;
-    groupRef.current.rotation.x = THREE.MathUtils.lerp(
-      groupRef.current.rotation.x,
-      targetY,
-      0.08
-    );
+    groupRef.current.rotation.y = baseRotation.current;
   });
 
   return (
@@ -217,8 +199,7 @@ export default function HeroSection() {
                 enableDamping
                 dampingFactor={0.08}
                 enableZoom={false}
-                maxPolarAngle={Math.PI * 0.6}
-                minPolarAngle={Math.PI * 0.35}
+                enableRotate={false}
               />
             </group>
           </Suspense>
