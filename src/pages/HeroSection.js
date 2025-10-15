@@ -30,22 +30,22 @@ function Sculpture({ progressRef }) {
       // Right side; visible clockwise rotation across frames
       {
         pos: [0.7, -0.74, -0.05],
-        rot: [-0.02, -Math.PI * 0.0008, 0],
+        rot: [0, Math.PI / 2, 0],
         scale: 0.25,
       },
       {
         pos: [0.7, -0.74, -0.05],
-        rot: [-0.02, -Math.PI * 0.001067, 0],
+        rot: [0, Math.PI / 2, 0],
         scale: 0.25,
       },
       {
         pos: [0.7, -0.74, -0.05],
-        rot: [-0.02, -Math.PI * 0.001333, 0],
+        rot: [0, Math.PI / 2, 0],
         scale: 0.25,
       },
       {
         pos: [0.7, -0.74, -0.05],
-        rot: [-0.02, -Math.PI * 0.0016, 0],
+        rot: [0, Math.PI / 2, 0],
         scale: 0.25,
       },
     ],
@@ -90,8 +90,8 @@ function Sculpture({ progressRef }) {
     <group
       ref={groupRef}
       scale={0.2}
-      position={[-0.4, -0.85, 0]}
-      rotation={[0, -Math.PI * 0.001, 0]}
+      position={[-0.4, -0.65, 0.1]}
+      rotation={[0, Math.PI / 2, 0]}
     >
       <primitive object={scene} />
     </group>
