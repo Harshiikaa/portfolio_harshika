@@ -24,7 +24,7 @@ const skillsData = [
 
 const Skills = () => {
     return (
-        <section id="skills" className="pt-12 min-h-[90vh] bg-gradient-to-br from-gradientStart via-gradientMid to-gradientEnd text-light font-poppins">
+        <section id="skills" className="pt-12 min-h-[90vh] bg-black text-white font-[Inter]">
             <div className="container mx-auto px-6 max-w-5xl">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
@@ -44,13 +44,13 @@ const Skills = () => {
                             className="group relative overflow-hidden"
                         >
                             {/* Hover gradient overlay */}
-                            <div className={`absolute inset-0 bg-gradient-to-br ${skillSet.colorClass} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+                            <div className={`absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
 
                             {/* Card content */}
-                            <div className="relative p-6 bg-light text-dark rounded-xl border border-white/10 shadow-md">
+                            <div className="relative p-6 bg-white/5 text-white rounded-xl border border-white/10 shadow-md">
                                 <div className="flex items-center gap-3 mb-6">
                                     {skillSet.icon}
-                                    <h3 className="text-lg font-semibold text-dark">
+                                    <h3 className="text-lg font-semibold text-white">
                                         {skillSet.category}
                                     </h3>
                                 </div>
@@ -60,10 +60,10 @@ const Skills = () => {
                                         <motion.div
                                             key={skill}
                                             whileHover={{ scale: 1.02 }}
-                                            className="px-3 py-2 bg-gray-100 text-sm rounded-lg text-dark text-center transition-colors hover:bg-white relative"
+                                            className="px-3 py-2 bg-white/10 text-sm rounded-lg text-white text-center transition-colors hover:bg-white/20 relative"
                                         >
                                             {skill}
-                                            <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary" />
+                                            <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/20" />
                                         </motion.div>
                                     ))}
                                 </div>

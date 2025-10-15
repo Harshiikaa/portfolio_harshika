@@ -213,21 +213,7 @@ export default function HeroSection() {
         </div>
       </section>
 
-      {/* === PROJECTS PLACEHOLDER === */}
-      <section
-        ref={projectsRef}
-        className="min-h-screen bg-neutral-950 text-white flex items-center justify-center"
-      >
-        <h2 className="text-4xl">Projects Section Placeholder</h2>
-      </section>
-
-      {/* === ART GALLERY PLACEHOLDER === */}
-      <section
-        ref={artRef}
-        className="min-h-screen bg-black text-white flex items-center justify-center"
-      >
-        <h2 className="text-4xl">Art Gallery Section Placeholder</h2>
-      </section>
+      {/* Removed placeholders */}
     </div>
   );
 }

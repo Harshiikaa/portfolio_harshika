@@ -21,7 +21,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="pt-12 min-h-[90vh] bg-gradient-to-br from-gradientStart via-gradientMid to-gradientEnd text-light font-poppins"
+      className="pt-12 min-h-[90vh] bg-black text-white font-[Inter]"
     >
       <div className="container mx-auto px-6">
         <motion.h2
@@ -33,7 +33,7 @@ const About = () => {
           About
         </motion.h2>
 
-        <p className="mb-6 text-light text-center max-w-3xl mx-auto font-roboto">
+        <p className="mb-6 text-white/80 text-center max-w-3xl mx-auto">
           I'm <span className="font-semibold text-tertiary">Harshika Chaudhary</span>, a frontend specialist dedicated to crafting high-performance web applications. With expertise in modern JavaScript ecosystems, I architect solutions that combine technical excellence with intuitive user experiences.
         </p>
 
@@ -43,12 +43,12 @@ const About = () => {
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              className="prose-lg text-light"
+              className="prose-lg text-white/90"
             >
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
-                  <div className="h-px w-12 bg-tertiary" />
-                  <span className="text-sm font-medium text-tertiary">KEY TOOLS I USE</span>
+                  <div className="h-px w-12 bg-white/40" />
+                  <span className="text-sm font-medium text-white/70">KEY TOOLS I USE</span>
                 </div>
 
                 <ul className="grid grid-cols-2 gap-4">
@@ -56,7 +56,7 @@ const About = () => {
                     <motion.li
                       key={tech.name}
                       whileHover={{ x: 5 }}
-                      className="flex items-center justify-between p-3 bg-light text-dark rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                      className="flex items-center justify-between p-3 bg-white/5 text-white rounded-lg border border-white/10 shadow-sm hover:shadow-md transition-shadow"
                     >
                       <span className="font-medium">{tech.name}</span>
                     </motion.li>
@@ -70,22 +70,22 @@ const About = () => {
           <div className="grid gap-4">
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
-                <div className="h-px w-12 bg-primary" />
-                <span className="text-sm font-medium text-secondary">EDUCATION</span>
+                <div className="h-px w-12 bg-white/40" />
+                <span className="text-sm font-medium text-white/70">EDUCATION</span>
               </div>
 
               <motion.div
                 whileHover={{ y: -2 }}
-                className="p-10 bg-light text-dark rounded-xl shadow-sm border-l-4 border-secondary"
+                className="p-10 bg-white/5 text-white rounded-xl shadow-sm border-l-4 border-secondary border-white/10"
               >
-                <p className="text-sm text-muted mb-1">Undergraduate Degree</p>
-                <h3 className="font-bold text-dark mb-2 flex items-center gap-2">
+                <p className="text-sm text-white/70 mb-1">Undergraduate Degree</p>
+                <h3 className="font-bold text-white mb-2 flex items-center gap-2">
                   📚 B.Sc.(Hons) in Computing
                 </h3>
-                <p className="text-xs text-accent">Coventry University, 2024</p>
+                <p className="text-xs text-white/70">Coventry University, 2024</p>
 
                 <div className="mt-3 space-y-2">
-                  <p className="text-xs font-medium text-dark">Relevant Coursework:</p>
+                  <p className="text-xs font-medium text-white/80">Relevant Coursework:</p>
                   <div className="flex flex-wrap gap-2">
                     {[
                       "Web Development",
@@ -99,7 +99,7 @@ const About = () => {
                     ].map((course) => (
                       <span
                         key={course}
-                        className="px-2 py-1 bg-gray-200 text-dark text-xs rounded-full"
+                        className="px-2 py-1 bg-white/10 text-white text-xs rounded-full"
                       >
                         {course}
                       </span>

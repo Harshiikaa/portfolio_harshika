@@ -32,7 +32,7 @@ const Contact = () => {
     return (
         <section
             id="contact"
-            className="relative py-20 pt-12 min-h-[90vh] bg-gradient-to-br from-gradientStart via-gradientMid to-gradientEnd text-light font-poppins"
+            className="relative py-20 pt-12 min-h-[90vh] bg-black text-white font-[Inter]"
         >
             <div className="container mx-auto px-6">
                 <motion.h2
@@ -49,42 +49,42 @@ const Contact = () => {
                     <motion.div
                         initial={{ scale: 0.95 }}
                         whileInView={{ scale: 1 }}
-                        className="bg-light text-dark p-8 rounded-2xl shadow-lg border border-white/10"
+                        className="bg-white/5 text-white p-8 rounded-2xl shadow-lg border border-white/10"
                     >
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div>
-                                <label className="block mb-2 text-sm font-medium text-muted">Name</label>
+                                <label className="block mb-2 text-sm font-medium text-white/70">Name</label>
                                 <motion.input
                                     whileFocus={{ scale: 1.01 }}
                                     type="text"
                                     name="name"
                                     placeholder="Your Name"
-                                    className="w-full p-3.5 rounded-xl bg-white border border-gray-300 text-dark placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                                    className="w-full p-3.5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 shadow-sm focus:outline-none focus:ring-2 focus:ring-white/30 transition-all"
                                     required
                                 />
                             </div>
 
                             <div>
-                                <label className="block mb-2 text-sm font-medium text-muted">Email</label>
+                                <label className="block mb-2 text-sm font-medium text-white/70">Email</label>
                                 <motion.input
                                     whileFocus={{ scale: 1.01 }}
                                     type="email"
                                     name="email"
                                     placeholder="your@email.com"
-                                    className="w-full p-3.5 rounded-xl bg-white border border-gray-300 text-dark placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                                    className="w-full p-3.5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 shadow-sm focus:outline-none focus:ring-2 focus:ring-white/30 transition-all"
                                     required
                                 />
                             </div>
 
                             <div>
 
-                                <label className="block mb-2 text-sm font-medium text-muted">Message</label>
+                                <label className="block mb-2 text-sm font-medium text-white/70">Message</label>
                                 <motion.textarea
                                     whileFocus={{ scale: 1.01 }}
                                     name="message"
                                     rows="3"
                                     placeholder="How can I help you?"
-                                    className="w-full p-3.5 rounded-xl bg-white border border-gray-300 text-dark placeholder-gray-400 shadow-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                                    className="w-full p-3.5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 shadow-sm resize-none focus:outline-none focus:ring-2 focus:ring-white/30 transition-all"
                                     required
                                 />
                             </div>
@@ -93,7 +93,7 @@ const Contact = () => {
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.97 }}
                                 type="submit"
-                                className="w-full bg-primary text-white py-4 rounded-xl font-semibold hover:bg-opacity-90 transition-all shadow-md flex items-center justify-center gap-2"
+                                className="w-full bg-white/10 text-white py-4 rounded-xl font-semibold hover:bg-white/20 transition-all shadow-md flex items-center justify-center gap-2"
                             >
                                 {isSubmitted ? (
                                     <>
@@ -117,7 +117,7 @@ const Contact = () => {
                             whileInView={{ opacity: 1, x: 0 }}
                             className="space-y-6"
                         >
-                            <h3 className="text-2xl font-semibold mb-6 text-light">
+                            <h3 className="text-2xl font-semibold mb-6 text-white">
                                 Other Ways to Reach Me
                             </h3>
                         </motion.div>
@@ -125,10 +125,10 @@ const Contact = () => {
                             <motion.a
                                 href="mailto:chaudharyharshika8@gmail.com"
                                 whileHover={{ x: 5 }}
-                                className="inline-flex items-center gap-3 px-6 py-2.5 bg-light text-dark border border-white/10 rounded-xl hover:bg-white/90 transition-colors text-sm shadow-sm"
+                                className="inline-flex items-center gap-3 px-6 py-2.5 bg-white/5 text-white border border-white/10 rounded-xl hover:bg-white/10 transition-colors text-sm shadow-sm"
                             >
-                                <FiMail className="text-2xl text-primary" />
-                                <span className="text-lg">chaudharyharshika8@gmail.com</span>
+                                <FiMail className="text-2xl text-white" />
+                                <span className="text-lg text-white">chaudharyharshika8@gmail.com</span>
                             </motion.a>
 
                             <motion.a
@@ -136,10 +136,10 @@ const Contact = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 whileHover={{ x: 5 }}
-                                className="inline-flex items-center gap-3 px-6 py-2.5 bg-light text-dark border border-white/10 rounded-xl hover:bg-white/90 transition-colors text-sm shadow-sm"
+                                className="inline-flex items-center gap-3 px-6 py-2.5 bg-white/5 text-white border border-white/10 rounded-xl hover:bg-white/10 transition-colors text-sm shadow-sm"
                             >
-                                <FiLinkedin className="text-2xl text-secondary" />
-                                <span className="text-lg">LinkedIn Profile</span>
+                                <FiLinkedin className="text-2xl text-white" />
+                                <span className="text-lg text-white">LinkedIn Profile</span>
                             </motion.a>
 
                             <motion.a
@@ -147,10 +147,10 @@ const Contact = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 whileHover={{ x: 5 }}
-                                className="inline-flex items-center gap-3 px-6 py-2.5 bg-light text-dark border border-white/10 rounded-xl hover:bg-white/90 transition-colors text-sm shadow-sm"
+                                className="inline-flex items-center gap-3 px-6 py-2.5 bg-white/5 text-white border border-white/10 rounded-xl hover:bg-white/10 transition-colors text-sm shadow-sm"
                             >
-                                <FiGithub className="text-2xl text-accent" />
-                                <span className="text-lg">GitHub Link</span>
+                                <FiGithub className="text-2xl text-white" />
+                                <span className="text-lg text-white">GitHub Link</span>
                             </motion.a>
 
                             <motion.a
@@ -158,10 +158,10 @@ const Contact = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 whileHover={{ x: 5 }}
-                                className="inline-flex items-center gap-3 px-6 py-2.5 bg-light text-dark border border-white/10 rounded-xl hover:bg-white/90 transition-colors text-sm shadow-sm"
+                                className="inline-flex items-center gap-3 px-6 py-2.5 bg-white/5 text-white border border-white/10 rounded-xl hover:bg-white/10 transition-colors text-sm shadow-sm"
                             >
-                                <FiFile className="text-2xl text-secondary" />
-                                <span className="text-lg">Resume</span>
+                                <FiFile className="text-2xl text-white" />
+                                <span className="text-lg text-white">Resume</span>
                             </motion.a>
                         </div>
 

@@ -28,7 +28,7 @@ const projects = [
 
 const Projects = () => {
     return (
-        <section id="projects" className="pt-12 min-h-screen bg-gradient-to-br from-gradientStart via-gradientMid to-gradientEnd text-light font-poppins">
+        <section id="projects" className="pt-12 min-h-screen bg-black text-white font-[Inter]">
             <div className="container mx-auto px-6 max-w-5xl">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
@@ -46,10 +46,10 @@ const Projects = () => {
                             initial={{ y: 20, opacity: 0 }}
                             whileInView={{ y: 0, opacity: 1 }}
                             viewport={{ once: true }}
-                            className="group relative overflow-hidden rounded-xl bg-light border border-white/10 shadow"
+                            className="group relative overflow-hidden rounded-xl bg-white/5 border border-white/10 shadow"
                         >
                             <div
-                                className={`absolute inset-0 bg-gradient-to-b from-${project.accent}/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity`}
+                                className={`absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity`}
                             />
 
                             {/* Image Section */}
@@ -60,14 +60,14 @@ const Projects = () => {
                                     className="absolute w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                                     loading="lazy"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-dark/30 to-transparent" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                             </div>
 
                             {/* Description Section */}
-                            <div className="p-8 text-dark">
+                            <div className="p-8 text-white">
                                 <div className="mb-6">
-                                    <h3 className="text-2xl font-semibold mb-3">{project.title}</h3>
-                                    <p className="text-muted leading-relaxed mb-6">{project.description}</p>
+                                    <h3 className="text-2xl font-semibold mb-3 text-white">{project.title}</h3>
+                                    <p className="text-white/80 leading-relaxed mb-6">{project.description}</p>
                                 </div>
 
                                 <div className="space-y-6">
@@ -78,7 +78,7 @@ const Projects = () => {
                                                 <motion.div
                                                     key={idx}
                                                     whileHover={{ y: -2 }}
-                                                    className="px-3 py-1.5 bg-gray-100 text-sm rounded-full text-dark"
+                                                    className="px-3 py-1.5 bg-white/10 text-sm rounded-full text-white"
                                                 >
                                                     #{tech}
                                                 </motion.div>
@@ -92,7 +92,7 @@ const Projects = () => {
                                             {project.metrics.map((metric, idx) => (
                                                 <div
                                                     key={idx}
-                                                    className="px-3 py-1.5 bg-primary/10 text-sm rounded-full text-dark"
+                                                    className="px-3 py-1.5 bg-white/10 text-sm rounded-full text-white"
                                                 >
                                                     ✓ {metric}
                                                 </div>
@@ -108,7 +108,7 @@ const Projects = () => {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         whileHover={{ x: 5 }}
-                                        className="flex items-center gap-2 text-dark hover:text-dark/80"
+                                        className="flex items-center gap-2 text-white hover:text-white/80"
                                     >
                                         <FiGithub className="text-xl" />
                                         <span className="font-medium">Source Code</span>
@@ -119,10 +119,7 @@ const Projects = () => {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         whileHover={{ x: 5 }}
-                                        className={`flex items-center gap-2 ${project.accent === "primary"
-                                            ? "text-primary hover:text-primary/80"
-                                            : "text-secondary hover:text-secondary/80"
-                                            }`}
+                                        className={`flex items-center gap-2 text-white hover:text-white/80`}
                                     >
                                         <span className="font-medium">Live Demo</span>
                                         <FiArrowUpRight className="text-xl" />
@@ -133,14 +130,14 @@ const Projects = () => {
                     ))}
                 </div>
 
-                <div className="pt-6 pb-4 text-center text-sm text-muted">
+                <div className="pt-6 pb-4 text-center text-sm text-white/70">
                     Explore more on my{' '}
                     <motion.a
                         href="https://github.com/Harshiikaa"
                         target="_blank"
                         rel="noopener noreferrer"
                         whileHover={{ x: 5 }}
-                        className="text-tertiary underline hover:text-tertiary/80 inline-flex items-center gap-1"
+                        className="text-white underline hover:text-white/80 inline-flex items-center gap-1"
                     >
                         GitHub profile →
                     </motion.a>
