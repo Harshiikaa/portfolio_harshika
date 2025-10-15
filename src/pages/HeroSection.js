@@ -1,16 +1,23 @@
 // src/pages/HeroSection.jsx
 import { Suspense, useEffect, useRef } from "react";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useAnimations, useGLTF } from "@react-three/drei";
+import { Canvas, useFrame } from "@react-three/fiber";
+import {
+  Environment,
+  OrbitControls,
+  useAnimations,
+  useGLTF,
+} from "@react-three/drei";
 import * as THREE from "three";
 import useSmoothScroll from "../hooks/useSmoothScroll";
-import HeroText from "../components/HeroText";
+import MuseumHeroText from "../components/MuseumHeroText";
 
 function Sculpture() {
   const groupRef = useRef();
   const { scene, animations } = useGLTF("/models/rhetorician.glb");
   const { actions } = useAnimations(animations, groupRef);
   const animationSpeed = 2.0; // speed multiplier
+  const mouse = useRef({ x: 0, y: 0 });
+  const baseRotation = useRef(0);
 
   useEffect(() => {
     if (!actions) return;
@@ -93,6 +100,29 @@ function Sculpture() {
     };
   }, [scene]);
 
+  useEffect(() => {
+    const handleMove = (e) => {
+      const x = (e.clientX / window.innerWidth) * 2 - 1;
+      const y = (e.clientY / window.innerHeight) * 2 - 1;
+      mouse.current = { x, y };
+    };
+    window.addEventListener("mousemove", handleMove, { passive: true });
+    return () => window.removeEventListener("mousemove", handleMove);
+  }, []);
+
+  useFrame((_, delta) => {
+    if (!groupRef.current) return;
+    baseRotation.current += delta * 0.15; // slow auto-rotate
+    const targetY = mouse.current.y * 0.08;
+    const targetX = -mouse.current.x * 0.08;
+    groupRef.current.rotation.y = baseRotation.current + targetX;
+    groupRef.current.rotation.x = THREE.MathUtils.lerp(
+      groupRef.current.rotation.x,
+      targetY,
+      0.08
+    );
+  });
+
   return (
     <group
       ref={groupRef}
@@ -127,52 +157,85 @@ export default function HeroSection() {
   const projectsRef = useRef(null);
   const artRef = useRef(null);
   const scroll = useSmoothScroll();
+  const canvasGroup = useRef(null);
+
+  useEffect(() => {
+    // parallax depth based on scroll
+    const onScroll = () => {
+      if (!canvasGroup.current) return;
+      const t = window.scrollY / window.innerHeight; // 0..1 across viewport
+      const depth = THREE.MathUtils.lerp(0, -0.25, Math.min(t, 1));
+      canvasGroup.current.position.z = depth;
+      canvasGroup.current.position.y = THREE.MathUtils.lerp(
+        0,
+        -0.15,
+        Math.min(t, 1)
+      );
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <div>
       {/* === HERO SECTION === */}
       <section
         id="hero"
-        className="relative h-screen w-full overflow-hidden"
-        style={{
-          background: "radial-gradient(circle at center, #2a003f, #12001e)",
-        }}
+        className="relative h-screen w-full overflow-hidden bg-black"
       >
         <Canvas
-          camera={{ position: [2, 1.2, 0.5], fov: 15 }}
-          gl={{ toneMappingExposure: 1.1 }}
+          camera={{ position: [2.2, 1.2, 0.9], fov: 18 }}
+          gl={{ toneMappingExposure: 1.05 }}
           style={{ touchAction: "none" }}
         >
           <Suspense fallback={null}>
-            <ambientLight intensity={0.7} color="#ff4ecb" />
-            <pointLight
-              position={[0.2, 1.1, 1]}
-              intensity={4}
-              color="#ff4ecb"
-              distance={12}
-            />
-            <pointLight
-              position={[-0.6, 1.0, -1]}
-              intensity={2}
-              color="#ff4ecb"
-              distance={10}
-            />
-            <directionalLight position={[5, 5, 5]} intensity={0.8} />
-            <Sculpture />
-            <OrbitControls enableDamping dampingFactor={0.08} />
+            {/* slight parallax group */}
+            <group ref={canvasGroup}>
+              {/* soft cinematic lighting */}
+              <ambientLight intensity={0.25} />
+              <directionalLight position={[3, 5, 4]} intensity={0.6} />
+              <pointLight
+                position={[0, 1.2, 2]}
+                intensity={1.8}
+                color="#b58bff"
+                distance={10}
+              />
+              <Environment preset="warehouse" resolution={256} />
+              {/* glowing circular ring behind the model */}
+              <mesh position={[0, 0.35, -1.2]}>
+                <ringGeometry args={[0.65, 0.9, 64]} />
+                <meshBasicMaterial
+                  color="#9b87f5"
+                  transparent
+                  opacity={0.35}
+                  blending={THREE.AdditiveBlending}
+                />
+              </mesh>
+              <Sculpture />
+              <OrbitControls
+                enableDamping
+                dampingFactor={0.08}
+                enableZoom={false}
+                maxPolarAngle={Math.PI * 0.6}
+                minPolarAngle={Math.PI * 0.35}
+              />
+            </group>
           </Suspense>
         </Canvas>
 
         {/* === OVERLAY TEXT === */}
-        <div className="absolute inset-0 flex flex-col items-end justify-end text-right z-10 pr-16 translate-x-10 md:translate-x-24 translate-y-[-40px] text-white">
-          <HeroText />
+        <div className="absolute inset-0 z-10 flex items-center">
+          <div className="px-8 md:px-16">
+            <MuseumHeroText />
+          </div>
         </div>
       </section>
 
       {/* === PROJECTS PLACEHOLDER === */}
       <section
         ref={projectsRef}
-        className="min-h-screen bg-gray-950 text-white flex items-center justify-center"
+        className="min-h-screen bg-neutral-950 text-white flex items-center justify-center"
       >
         <h2 className="text-4xl">Projects Section Placeholder</h2>
       </section>

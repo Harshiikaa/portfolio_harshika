@@ -10,6 +10,7 @@ const Navbar = () => {
     { name: "Home", refKey: "homeRef" },
     { name: "About", refKey: "aboutRef" },
     { name: "Skills", refKey: "skillsRef" },
+    { name: "Experience", refKey: "experienceRef" },
     { name: "Projects", refKey: "projectRef" },
     { name: "Contact", refKey: "contactRef" },
   ];
@@ -29,26 +30,13 @@ const Navbar = () => {
   };
 
   return (
-    // <nav className="sticky top-0 z-50 bg-white/10 backdrop-blur-lg text-light border-b border-white/20 shadow-sm">
-    // <nav className="sticky top-0 z-50 bg-gradient-to-br backdrop-blur-lg from-gradientStart via-gradientMid to-gradientEnd">
-    <nav
-      className="sticky top-0 z-50"
-      style={{
-        background: "radial-gradient(circle at center, #2a003f, #12001e)",
-      }}
-    >
-      <div className="container mx-auto px-10 py-6">
+    <nav className="sticky top-0 z-50 bg-black/50 backdrop-blur-md border-b border-white/10">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
-          <a
-            href="#"
-            className="text-4xl font-bold text-light hover:text-dark transition-colors duration-300"
-          >
-            Portfolio
+          <a href="#" className="text-2xl md:text-3xl text-white font-[PlayfairDisplay] tracking-tight">
+            H. Chaudhary
           </a>
-
-          {/* Navigation Links */}
-          <div className="flex space-x-10 text-lg font-semibold">
+          <div className="flex space-x-8 text-sm md:text-base font-[Inter]">
             {navItems.map(({ name, refKey }) => (
               <a
                 key={name}
@@ -57,10 +45,10 @@ const Navbar = () => {
                   e.preventDefault();
                   scrollToSection(scrollRefs[refKey], name);
                 }}
-                className={`relative pb-1 text-xl transition-all duration-300 hover:scale-105 ${
+                className={`relative pb-1 transition-colors duration-300 ${
                   activeLink === name
-                    ? "text-light font-bold after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-light after:rounded"
-                    : "text-light hover:text-dark"
+                    ? "text-white after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[1px] after:bg-white/80"
+                    : "text-white/70 hover:text-white"
                 }`}
               >
                 {name}

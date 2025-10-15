@@ -6,6 +6,7 @@ export const ScrollProvider = ({ children }) => {
   const homeRef = useRef(null);
   const aboutRef = useRef(null);
   const skillsRef = useRef(null);
+  const experienceRef = useRef(null);
   const projectRef = useRef(null);
   const contactRef = useRef(null);
 
@@ -13,6 +14,7 @@ export const ScrollProvider = ({ children }) => {
     homeRef,
     aboutRef,
     skillsRef,
+    experienceRef,
     projectRef,
     contactRef,
   };
