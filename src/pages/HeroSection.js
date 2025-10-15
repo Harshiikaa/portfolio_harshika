@@ -27,19 +27,27 @@ function Sculpture({ progressRef }) {
   const targetPos = useRef(new THREE.Vector3());
   const frames = useMemo(
     () => [
-      { pos: [-0.4, -0.85, 0], rot: [0, Math.PI / 2, 0], scale: 0.2 },
+      // Right side; visible clockwise rotation across frames
       {
-        pos: [-0.1, -0.9, -0.1],
-        rot: [0.02, Math.PI * 0.7, 0.01],
-        scale: 0.22,
+        pos: [0.7, -0.74, -0.05],
+        rot: [-0.02, -Math.PI * 0.0008, 0],
+        scale: 0.25,
       },
       {
-        pos: [0.2, -0.92, -0.18],
-        rot: [0.03, Math.PI * 0.9, -0.02],
-        scale: 0.24,
+        pos: [0.7, -0.74, -0.05],
+        rot: [-0.02, -Math.PI * 0.001067, 0],
+        scale: 0.25,
       },
-      // Final pose raised slightly and a touch smaller to avoid canvas cut
-      { pos: [0.0, -0.8, -0.25], rot: [0.0, Math.PI * 1.1, 0.0], scale: 0.24 },
+      {
+        pos: [0.7, -0.74, -0.05],
+        rot: [-0.02, -Math.PI * 0.001333, 0],
+        scale: 0.25,
+      },
+      {
+        pos: [0.7, -0.74, -0.05],
+        rot: [-0.02, -Math.PI * 0.0016, 0],
+        scale: 0.25,
+      },
     ],
     []
   );
@@ -83,7 +91,7 @@ function Sculpture({ progressRef }) {
       ref={groupRef}
       scale={0.2}
       position={[-0.4, -0.85, 0]}
-      rotation={[0, Math.PI / 2, 0]}
+      rotation={[0, -Math.PI * 0.001, 0]}
     >
       <primitive object={scene} />
     </group>
@@ -147,7 +155,7 @@ export default function HeroSection() {
       >
         <div className="sticky top-0 h-screen w-full">
           <Canvas
-            camera={{ position: [2.6, 1.3, 1.2], fov: 20 }}
+            camera={{ position: [2.2, 1.15, 0.95], fov: 20 }}
             gl={{ toneMappingExposure: 1.05 }}
             style={{ touchAction: "none" }}
           >

@@ -17,10 +17,10 @@ function KeyframedSculpture({ progressRef }) {
 
   const frames = useMemo(
     () => [
-      { pos: [0.0, -0.85, 0.0], rot: [0.0, Math.PI * 0.55, 0.0], scale: 0.2 },
-      { pos: [0.18, -0.9, -0.1], rot: [0.05, Math.PI * 0.75, 0.02], scale: 0.22 },
-      { pos: [0.38, -0.92, -0.18], rot: [0.03, Math.PI * 0.95, -0.02], scale: 0.24 },
-      { pos: [0.1, -0.96, -0.3], rot: [0.0, Math.PI * 1.15, 0.0], scale: 0.28 },
+      { pos: [0.0, -0.85, 0.0], rot: [0.0, -Math.PI * 0.001, 0.0], scale: 0.2 },
+      { pos: [0.18, -0.9, -0.1], rot: [0.05, -Math.PI * 0.002333, 0.02], scale: 0.22 },
+      { pos: [0.38, -0.92, -0.18], rot: [0.03, -Math.PI * 0.003667, -0.02], scale: 0.24 },
+      { pos: [0.1, -0.96, -0.3], rot: [0.0, -Math.PI * 0.003667, 0.0], scale: 0.28 },
     ],
     []
   );
