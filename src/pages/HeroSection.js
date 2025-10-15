@@ -1,6 +1,6 @@
 // src/pages/HeroSection.jsx
-import { Suspense, useEffect, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
   Environment,
   OrbitControls,
@@ -11,12 +11,38 @@ import * as THREE from "three";
 import useSmoothScroll from "../hooks/useSmoothScroll";
 import MuseumHeroText from "../components/MuseumHeroText";
 
-function Sculpture() {
+function lerp(a, b, t) {
+  return a + (b - a) * t;
+}
+
+function lerpVec3(out, a, b, t) {
+  out.set(lerp(a[0], b[0], t), lerp(a[1], b[1], t), lerp(a[2], b[2], t));
+}
+
+function Sculpture({ progressRef }) {
   const groupRef = useRef();
   const { scene, animations } = useGLTF("/models/rhetorician.glb");
   const { actions } = useAnimations(animations, groupRef);
   const animationSpeed = 2.0; // speed multiplier
-  const baseRotation = useRef(0);
+  const targetPos = useRef(new THREE.Vector3());
+  const frames = useMemo(
+    () => [
+      { pos: [-0.4, -0.85, 0], rot: [0, Math.PI / 2, 0], scale: 0.2 },
+      {
+        pos: [-0.1, -0.9, -0.1],
+        rot: [0.02, Math.PI * 0.7, 0.01],
+        scale: 0.22,
+      },
+      {
+        pos: [0.2, -0.92, -0.18],
+        rot: [0.03, Math.PI * 0.9, -0.02],
+        scale: 0.24,
+      },
+      // Final pose raised slightly and a touch smaller to avoid canvas cut
+      { pos: [0.0, -0.8, -0.25], rot: [0.0, Math.PI * 1.1, 0.0], scale: 0.24 },
+    ],
+    []
+  );
 
   useEffect(() => {
     if (!actions) return;
@@ -28,81 +54,28 @@ function Sculpture() {
     });
   }, [actions]);
 
-  // Set halo ring to pink and increase glow
-  useEffect(() => {
-    if (!scene) return;
-    scene.traverse((obj) => {
-      if (!obj || !obj.isMesh) return;
-      const name = (obj.name || "").toLowerCase();
-      if (
-        name.includes("nimbus") ||
-        name.includes("halo") ||
-        name.includes("ring")
-      ) {
-        const mat = obj.material;
-        if (mat) {
-          const haloColor = "#ff4ecb"; // vibrant pink
-          if (mat.color) mat.color.set(haloColor);
-          if (mat.emissive) mat.emissive.set(haloColor);
-          if (typeof mat.emissiveIntensity === "number")
-            mat.emissiveIntensity = 4.0;
-          // Additive blend for stronger effect
-          mat.transparent = true;
-          mat.blending = THREE.AdditiveBlending;
-          mat.depthWrite = false;
-          mat.needsUpdate = true;
-        }
-      }
-    });
-  }, [scene]);
+  // Keep original materials
+  useEffect(() => {}, [scene]);
 
-  // Add an additive overlay to make halo rings self-glow (safe)
-  useEffect(() => {
-    if (!scene) return;
-    const overlays = [];
-    const targets = [];
-    scene.traverse((obj) => {
-      if (!obj || !obj.isMesh) return;
-      if (obj.userData && obj.userData.isHaloOverlay) return; // skip overlays
-      const name = (obj.name || "").toLowerCase();
-      if (
-        name.includes("nimbus") ||
-        name.includes("halo") ||
-        name.includes("ring")
-      ) {
-        const already = (obj.children || []).some(
-          (c) => c.userData && c.userData.isHaloOverlay
-        );
-        if (!already) targets.push(obj);
-      }
-    });
-    targets.forEach((obj) => {
-      const overlayMat = new THREE.MeshBasicMaterial({
-        color: new THREE.Color("#ff4ecb"),
-        transparent: true,
-        opacity: 0.5,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false,
-      });
-      const overlay = new THREE.Mesh(obj.geometry, overlayMat);
-      overlay.userData = { ...(overlay.userData || {}), isHaloOverlay: true };
-      overlay.name = `${obj.name || "halo"}__overlay`;
-      overlay.scale.copy(obj.scale).multiplyScalar(1.03);
-      overlay.position.set(0, 0, 0);
-      overlay.quaternion.identity();
-      overlay.renderOrder = 1000;
-      obj.add(overlay);
-      overlays.push(overlay);
-    });
-    return () => {
-      overlays.forEach((o) => o.parent && o.parent.remove(o));
-    };
-  }, [scene]);
+  // No additive overlays
+  useEffect(() => {}, [scene]);
 
-  useFrame((_, delta) => {
+  useFrame(() => {
     if (!groupRef.current) return;
-    baseRotation.current += delta * 0.15; // slow auto-rotate
-    groupRef.current.rotation.y = baseRotation.current;
+    const p = Math.min(Math.max(progressRef.current || 0, 0), 1);
+    const segments = frames.length - 1;
+    const f = p * segments;
+    const i = Math.floor(f);
+    const t = Math.min(1, Math.max(0, f - i));
+    const a = frames[i];
+    const b = frames[Math.min(i + 1, frames.length - 1)];
+    lerpVec3(targetPos.current, a.pos, b.pos, t);
+    groupRef.current.position.lerp(targetPos.current, 0.15);
+    groupRef.current.rotation.x = lerp(a.rot[0], b.rot[0], t);
+    groupRef.current.rotation.y = lerp(a.rot[1], b.rot[1], t);
+    groupRef.current.rotation.z = lerp(a.rot[2], b.rot[2], t);
+    const s = lerp(a.scale, b.scale, t);
+    groupRef.current.scale.setScalar(s);
   });
 
   return (
@@ -140,19 +113,24 @@ export default function HeroSection() {
   const artRef = useRef(null);
   const scroll = useSmoothScroll();
   const canvasGroup = useRef(null);
+  const sectionRef = useRef(null);
+  const progressRef = useRef(0);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // parallax depth based on scroll
+    // section-scoped progress 0..1 across the whole hero area (spans hero -> about)
     const onScroll = () => {
-      if (!canvasGroup.current) return;
-      const t = window.scrollY / window.innerHeight; // 0..1 across viewport
-      const depth = THREE.MathUtils.lerp(0, -0.25, Math.min(t, 1));
+      if (!sectionRef.current || !canvasGroup.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const total = rect.height - window.innerHeight;
+      const scrolled = Math.min(Math.max(0, -rect.top), total);
+      const t = total > 0 ? scrolled / total : 0;
+      progressRef.current = t;
+      setProgress(t);
+      // subtle depth parallax
+      const depth = THREE.MathUtils.lerp(0, -0.25, t);
       canvasGroup.current.position.z = depth;
-      canvasGroup.current.position.y = THREE.MathUtils.lerp(
-        0,
-        -0.15,
-        Math.min(t, 1)
-      );
+      canvasGroup.current.position.y = THREE.MathUtils.lerp(0, -0.15, t);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -161,54 +139,60 @@ export default function HeroSection() {
 
   return (
     <div>
-      {/* === HERO SECTION === */}
+      {/* === HERO + ABOUT-ME SCROLL SECTION (sticky Canvas) === */}
       <section
+        ref={sectionRef}
         id="hero"
         className="relative h-screen w-full overflow-hidden bg-black"
       >
-        <Canvas
-          camera={{ position: [2.2, 1.2, 0.9], fov: 18 }}
-          gl={{ toneMappingExposure: 1.05 }}
-          style={{ touchAction: "none" }}
-        >
-          <Suspense fallback={null}>
-            {/* slight parallax group */}
-            <group ref={canvasGroup}>
-              {/* soft cinematic lighting */}
-              <ambientLight intensity={0.25} />
-              <directionalLight position={[3, 5, 4]} intensity={0.6} />
-              <pointLight
-                position={[0, 1.2, 2]}
-                intensity={1.8}
-                color="#b58bff"
-                distance={10}
-              />
-              <Environment preset="warehouse" resolution={256} />
-              {/* glowing circular ring behind the model */}
-              <mesh position={[0, 0.35, -1.2]}>
-                <ringGeometry args={[0.65, 0.9, 64]} />
-                <meshBasicMaterial
-                  color="#9b87f5"
-                  transparent
-                  opacity={0.35}
-                  blending={THREE.AdditiveBlending}
+        <div className="sticky top-0 h-screen w-full">
+          <Canvas
+            camera={{ position: [2.6, 1.3, 1.2], fov: 20 }}
+            gl={{ toneMappingExposure: 1.05 }}
+            style={{ touchAction: "none" }}
+          >
+            <Suspense fallback={null}>
+              {/* slight parallax group */}
+              <group ref={canvasGroup}>
+                {/* soft cinematic lighting */}
+                <ambientLight intensity={0.25} />
+                <directionalLight position={[3, 5, 4]} intensity={0.6} />
+                <pointLight
+                  position={[0, 1.2, 2]}
+                  intensity={1.8}
+                  color="#b58bff"
+                  distance={10}
                 />
-              </mesh>
-              <Sculpture />
-              <OrbitControls
-                enableDamping
-                dampingFactor={0.08}
-                enableZoom={false}
-                enableRotate={false}
-              />
-            </group>
-          </Suspense>
-        </Canvas>
+                <Environment preset="warehouse" resolution={256} />
+                {/* glowing circular ring behind the model */}
+                <mesh position={[0, 0.35, -1.2]}>
+                  <ringGeometry args={[0.65, 0.9, 64]} />
+                  <meshBasicMaterial
+                    color="#9b87f5"
+                    transparent
+                    opacity={0.35}
+                    blending={THREE.AdditiveBlending}
+                  />
+                </mesh>
+                <Sculpture progressRef={progressRef} />
+                <OrbitControls
+                  enableDamping
+                  dampingFactor={0.08}
+                  enableZoom={false}
+                  enableRotate={false}
+                />
+              </group>
+            </Suspense>
+          </Canvas>
 
-        {/* === OVERLAY TEXT === */}
-        <div className="absolute inset-0 z-10 flex items-center">
-          <div className="px-8 md:px-16">
-            <MuseumHeroText />
+          {/* HERO overlay text (fades out by mid scroll) */}
+          <div
+            className="absolute inset-0 z-10 flex items-center"
+            style={{ opacity: 1 - Math.min(1, progress * 2) }}
+          >
+            <div className="px-8 md:px-16">
+              <MuseumHeroText />
+            </div>
           </div>
         </div>
       </section>
