@@ -75,7 +75,7 @@ export default function AboutMe3D() {
     <section ref={sectionRef} className="relative min-h-[300vh] bg-black text-white">
       {/* sticky 3D viewport */}
       <div className="sticky top-0 h-screen w-full">
-        <Canvas camera={{ position: [1.3, 2.8, 1.1], fov: 30 }} gl={{ toneMappingExposure: 1.05 }}>
+        <Canvas camera={{ position: [1.3, 2.2, 1.9], fov: 29 }} gl={{ toneMappingExposure: 1.05 }}>
           {/* lighting similar to hero */}
           <ambientLight intensity={0.35} />
           <directionalLight position={[3, 5, 4]} intensity={0.6} />

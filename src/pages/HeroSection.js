@@ -187,7 +187,7 @@ export default function HeroSection() {
       >
         <div className="sticky top-0 h-screen w-full">
           <Canvas
-            camera={{ position: [2.2, 1.0, 1.55], fov: 20 }}
+            camera={{ position: [2.2, 0.58, 2.6], fov: 19 }}
             gl={{ toneMappingExposure: 1.05 }}
             style={{ touchAction: "none" }}
           >
@@ -219,7 +219,9 @@ export default function HeroSection() {
                 <OrbitControls
                   enableDamping
                   dampingFactor={0.08}
-                  enableZoom={false}
+                  enableZoom={true}
+                  minDistance={1.5}
+                  maxDistance={9}
                   enableRotate={false}
                 />
               </group>
