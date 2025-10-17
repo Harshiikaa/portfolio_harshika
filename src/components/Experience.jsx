@@ -2,23 +2,23 @@ import { motion } from "framer-motion";
 
 const experiences = [
   {
-    role: "Full Stack Developer",
-    company: "Freelance",
-    period: "2023 — Present",
+    role: "Junior Full-stack Developer",
+    company: "Wisdom Technologies Pvt. Ltd – Kathmandu, Nepal",
+    period: "June 2025 — Present",
     points: [
-      "Built MERN applications with secure auth and role-based access",
-      "Designed responsive UIs with React and Tailwind CSS",
-      "Integrated REST APIs, optimized queries and deployments",
+      "Build secure, scalable, high‑performance web apps with Node.js, Express, MongoDB, and React.js.",
+      "Design and maintain REST API architecture, implement role‑based access, and integrate features like Nodemailer, token workflows, and multi‑tenant systems.",
+      "Apply clean architecture for modular services, enforce data integrity with transactions and enums, and optimize performance with efficient async workflows.",
     ],
   },
   {
-    role: "Frontend Developer",
-    company: "Personal Projects",
-    period: "2022 — 2023",
+    role: "Flutter Developer Intern",
+    company: "Discounts Pvt. Ltd – Lalitpur, Nepal",
+    period: "Jan 2024 — Sept 2024",
     points: [
-      "Created reusable component systems and design patterns",
-      "Improved performance through memoization and code-splitting",
-      "Prototyped UI/UX in Figma and translated to production",
+      "Transformed Figma designs into responsive, cross‑platform UIs to deliver a smooth, engaging user experience.",
+      "Collaborated with backend teams to optimize API integrations, reduce response times, and enhance overall app stability.",
+      "Drove continuous testing and debugging to ship a reliable, user‑focused app while strengthening mobile UI/UX fundamentals.",
     ],
   },
 ];
@@ -57,7 +57,7 @@ const Experience = () => {
                   <h3 className="text-2xl font-semibold mt-3 text-white">{exp.role}</h3>
                   <p className="text-white/70">{exp.company}</p>
                 </div>
-                <div className={`mt-4 md:mt-0 ${idx % 2 === 0 ? "md:order-2" : ""}`}>
+                <div className={`mt-4 md:mt-2 ${idx % 2 === 0 ? "md:col-start-1 md:pr-10" : "md:col-start-2 md:pl-10 md:order-2"}`}>
                   <ul className="space-y-2">
                     {exp.points.map((p, i) => (
                       <li key={i} className="flex items-start gap-2">
