@@ -6,7 +6,9 @@ import {
   OrbitControls,
   useAnimations,
   useGLTF,
+  Text,
 } from "@react-three/drei";
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import * as THREE from "three";
 import useSmoothScroll from "../hooks/useSmoothScroll";
 import MuseumHeroText from "../components/MuseumHeroText";
@@ -17,6 +19,36 @@ function lerp(a, b, t) {
 
 function lerpVec3(out, a, b, t) {
   out.set(lerp(a[0], b[0], t), lerp(a[1], b[1], t), lerp(a[2], b[2], t));
+}
+
+// Rotating binary text halo with pink glow
+function HaloText() {
+  const groupRef = useRef();
+  useFrame((_, delta) => {
+    if (groupRef.current) groupRef.current.rotation.y += delta * 0.35;
+  });
+
+  const binary =
+    "0101 0110 0101 0001 0111 0010 0101 0110 0101 0001 0111 0010 ".repeat(6);
+
+  return (
+    <group ref={groupRef} position={[0, 1.05, 0]}>
+      <Text
+        anchorX="center"
+        anchorY="middle"
+        fontSize={0.12}
+        color="#ff4be6"
+        letterSpacing={0.03}
+        curveRadius={0.55}
+        outlineWidth={0.012}
+        outlineColor="#ff7af2"
+        outlineBlur={0.004}
+        toneMapped={false}
+      >
+        {binary}
+      </Text>
+    </group>
+  );
 }
 
 function Sculpture({ progressRef }) {
@@ -176,13 +208,14 @@ export default function HeroSection() {
                 <mesh position={[0, 0.35, -1.2]}>
                   <ringGeometry args={[0.65, 0.9, 64]} />
                   <meshBasicMaterial
-                    color="#9b87f5"
+                    color="#5A4F79"
                     transparent
                     opacity={0.35}
                     blending={THREE.AdditiveBlending}
                   />
                 </mesh>
                 <Sculpture progressRef={progressRef} />
+                <HaloText />
                 <OrbitControls
                   enableDamping
                   dampingFactor={0.08}
@@ -191,6 +224,14 @@ export default function HeroSection() {
                 />
               </group>
             </Suspense>
+            <EffectComposer>
+              <Bloom
+                intensity={1.6}
+                luminanceThreshold={0.45}
+                luminanceSmoothing={0.28}
+                mipmapBlur
+              />
+            </EffectComposer>
           </Canvas>
 
           {/* HERO overlay text (fades out by mid scroll) */}
