@@ -34,7 +34,7 @@ const About = () => {
         </motion.h2>
 
         <p className="mb-6 text-white/80 text-center max-w-3xl mx-auto">
-          I'm <span className="font-semibold text-tertiary">Harshika Chaudhary</span>, a frontend specialist dedicated to crafting high-performance web applications. With expertise in modern JavaScript ecosystems, I architect solutions that combine technical excellence with intuitive user experiences.
+          I'm <span className="font-semibold text-tertiary">Harshika Chaudhary</span>, a <span className="font-semibold text-tertiary">Full-Stack Developer</span> specializing in React.js and Node.js. I craft high-performance web applications that blend technical precision with intuitive, human-centered design. Building seamless experiences from front end to back end.
         </p>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -162,7 +162,7 @@ export default About;
 //                     About
 //                 </motion.h2>
 //                 <p className="mb-6">
-//                     I'm <span className="font-semibold text-primary">Harshika Chaudhary</span>, a frontend specialist dedicated to crafting high-performance web applications. With expertise in modern JavaScript ecosystems, I architect solutions that combine technical excellence with intuitive user experiences.
+//                     I'm <span className="font-semibold text-primary">Harshika Chaudhary</span>, <span className="font-semibold text-primary">fullstack dveveloper</span>.
 //                 </p>
 //                 <div className="grid md:grid-cols-2 gap-12 items-center">
 //                     {/* core cojmpetencies */}

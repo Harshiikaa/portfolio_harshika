@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import scrollTo from "scroll-to";
 import { useScrollRefs } from "../context/ScrollContext";
 
@@ -28,6 +28,39 @@ const Navbar = () => {
 
     setActiveLink(name);
   };
+
+  // Auto-highlight active link based on scroll position
+  useEffect(() => {
+    const sections = [
+      { name: "Home", el: scrollRefs.homeRef?.current },
+      { name: "About", el: scrollRefs.aboutRef?.current },
+      { name: "Skills", el: scrollRefs.skillsRef?.current },
+      { name: "Experience", el: scrollRefs.experienceRef?.current },
+      { name: "Projects", el: scrollRefs.projectRef?.current },
+      { name: "Contact", el: scrollRefs.contactRef?.current },
+    ].filter(s => s.el);
+
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const found = sections.find((s) => s.el === entry.target);
+            if (found) setActiveLink(found.name);
+          }
+        });
+      },
+      {
+        // Consider the section active when its midpoint enters viewport
+        root: null,
+        threshold: 0.5,
+      }
+    );
+
+    sections.forEach(({ el }) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [scrollRefs]);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-md border-b border-white/10">

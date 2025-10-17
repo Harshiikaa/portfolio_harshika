@@ -1,11 +1,23 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { FiMail, FiLinkedin, FiGithub, FiFile } from 'react-icons/fi';
+import { useEffect, useRef, useState } from 'react';
+import { FiMail, FiLinkedin, FiGithub, FiFile, FiArrowUp } from 'react-icons/fi';
+import scrollTo from 'scroll-to';
 import emailjs from '@emailjs/browser';
 import { toast } from 'react-toastify';
 
 const Contact = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [showArrow, setShowArrow] = useState(false);
+    const sectionRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => setShowArrow(entry.isIntersecting),
+            { threshold: 0.35 }
+        );
+        if (sectionRef.current) observer.observe(sectionRef.current);
+        return () => observer.disconnect();
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -33,7 +45,27 @@ const Contact = () => {
         <section
             id="contact"
             className="relative py-20 pt-12 min-h-[90vh] bg-black text-white font-[Inter]"
+            ref={sectionRef}
         >
+            {/* Up-hop button back to hero (subtle) */}
+            {showArrow && (
+                <motion.button
+                    aria-label="Back to top"
+                    initial={{ y: 0, opacity: 0 }}
+                    animate={{ y: [0, -6, 0], opacity: 1 }}
+                    transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+                    onClick={() => {
+                        const hero = document.getElementById('hero');
+                        if (!hero) return;
+                        const yOffset = -80;
+                        const y = hero.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                        scrollTo(0, y, { ease: 'in-out-sine', duration: 500 });
+                    }}
+                    className="fixed right-5 bottom-6 z-40 rounded-full w-10 h-10 flex items-center justify-center bg-white/5 text-white/80 border border-white/10 backdrop-blur-sm hover:bg-white/10"
+                >
+                    <FiArrowUp />
+                </motion.button>
+            )}
             <div className="container mx-auto px-6">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}

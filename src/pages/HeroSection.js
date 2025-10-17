@@ -37,12 +37,12 @@ function HaloText() {
         anchorX="center"
         anchorY="middle"
         fontSize={0.12}
-        color="#ff4be6"
+        color="#ffe6ff"
         letterSpacing={0.03}
         curveRadius={0.55}
-        outlineWidth={0.012}
-        outlineColor="#ff7af2"
-        outlineBlur={0.004}
+        outlineWidth={0.08}
+        outlineColor="#ff2fb3"
+        outlineBlur={0.12}
         toneMapped={false}
       >
         {binary}
@@ -228,9 +228,9 @@ export default function HeroSection() {
             </Suspense>
             <EffectComposer>
               <Bloom
-                intensity={1.6}
-                luminanceThreshold={0.45}
-                luminanceSmoothing={0.28}
+                intensity={2.9}
+                luminanceThreshold={0.38}
+                luminanceSmoothing={0.34}
                 mipmapBlur
               />
             </EffectComposer>
