@@ -61,23 +61,23 @@ function Sculpture({ progressRef }) {
     () => [
       // Right side; visible clockwise rotation across frames
       {
-        pos: [0.7, -0.74, -0.05],
-        rot: [0, Math.PI / 2 - 1.15, 0],
+        pos: [0.7, -0.9, -0.05],
+        rot: [0, 0.25, 0],
         scale: 0.25,
       },
       {
-        pos: [0.7, -0.74, -0.05],
-        rot: [0, Math.PI / 2 - 1.15, 0],
+        pos: [0.7, -0.9, -0.05],
+        rot: [0, 0.25, 0],
         scale: 0.25,
       },
       {
-        pos: [0.7, -0.74, -0.05],
-        rot: [0, Math.PI / 2 - 1.15, 0],
+        pos: [0.7, -0.9, -0.05],
+        rot: [0, 0.25, 0],
         scale: 0.25,
       },
       {
-        pos: [0.7, -0.74, -0.05],
-        rot: [0, Math.PI / 2 - 1.15, 0],
+        pos: [0.7, -0.9, -0.05],
+        rot: [0, 0.25, 0],
         scale: 0.25,
       },
     ],
@@ -123,7 +123,7 @@ function Sculpture({ progressRef }) {
       ref={groupRef}
       scale={0.2}
       position={[-0.4, -0.65, 0.1]}
-      rotation={[0, Math.PI / 2 - 1.15, 0]}
+      rotation={[0, 0.25, 0]}
     >
       <primitive object={scene} />
     </group>
@@ -187,7 +187,7 @@ export default function HeroSection() {
       >
         <div className="sticky top-0 h-screen w-full">
           <Canvas
-            camera={{ position: [2.2, 0.58, 2.6], fov: 19 }}
+            camera={{ position: [2.2, 0.35, 2.6], fov: 19 }}
             gl={{ toneMappingExposure: 1.05 }}
             style={{ touchAction: "none" }}
           >

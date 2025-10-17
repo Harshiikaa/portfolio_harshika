@@ -17,10 +17,10 @@ function KeyframedSculpture({ progressRef }) {
 
   const frames = useMemo(
     () => [
-      { pos: [0.0, -0.7, 0.08], rot: [0.0, Math.PI / 2, 0.0], scale: 0.32 },
-      { pos: [0.18, -0.75, -0.02], rot: [0.0, Math.PI / 2, 0.0], scale: 0.34 },
-      { pos: [0.38, -0.77, -0.1], rot: [0.0, Math.PI / 2, 0.0], scale: 0.36 },
-      { pos: [0.1, -0.81, -0.22], rot: [0.0, Math.PI / 2, 0.0], scale: 0.38 },
+      { pos: [0.0, -0.95, 0.08], rot: [0.0, 0.25, 0.0], scale: 0.32 },
+      { pos: [0.18, -1.0, -0.02], rot: [0.0, 0.25, 0.0], scale: 0.34 },
+      { pos: [0.38, -1.02, -0.1], rot: [0.0, 0.25, 0.0], scale: 0.36 },
+      { pos: [0.1, -1.06, -0.22], rot: [0.0, 0.25, 0.0], scale: 0.38 },
     ],
     []
   );
@@ -75,7 +75,7 @@ export default function AboutMe3D() {
     <section ref={sectionRef} className="relative min-h-[300vh] bg-black text-white">
       {/* sticky 3D viewport */}
       <div className="sticky top-0 h-screen w-full">
-        <Canvas camera={{ position: [1.3, 2.2, 1.9], fov: 29 }} gl={{ toneMappingExposure: 1.05 }}>
+        <Canvas camera={{ position: [1.3, 1.85, 1.9], fov: 29 }} gl={{ toneMappingExposure: 1.05 }}>
           {/* lighting similar to hero */}
           <ambientLight intensity={0.35} />
           <directionalLight position={[3, 5, 4]} intensity={0.6} />
