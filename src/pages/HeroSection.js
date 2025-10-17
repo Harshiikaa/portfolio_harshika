@@ -97,7 +97,7 @@ export default function HeroSection() {
         ref={artRef}
         className="min-h-screen bg-black text-white flex items-center justify-center"
       >
-        <h2 className="text-4xl">Art Gallery Section Placeholder</h2>
+        <h2 className="text-4xl">Art Gallery Section </h2>
       </section>
     </div>
   );
